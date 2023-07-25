@@ -1,10 +1,12 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import { useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useInView } from 'react-intersection-observer';
 
-interface Character {
+import Character from './Character';
+
+export interface ICharacter {
   id: number;
   name: string;
   status: string;
@@ -57,13 +59,14 @@ const Characters = () => {
   }
 
   return (
-    <div>
+    <div className="flex flex-wrap justify-center gap-3 px-2 py-6 sm:px-12">
       {data?.pages.map((page) =>
         page.results.map(
-          (character: Character, i: number, arr: Character[]) => (
-            <div key={character.id} ref={i === arr.length - 1 ? ref : null}>
-              {character.name}
-            </div>
+          (character: ICharacter, i: number, arr: ICharacter[]) => (
+            <React.Fragment key={character.id}>
+              <Character character={character} />
+              <span ref={i === arr.length - 1 ? ref : null} />
+            </React.Fragment>
           )
         )
       )}
