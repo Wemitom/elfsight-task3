@@ -4,7 +4,10 @@ import { ICharacter } from '..';
 
 const Character = ({ character }: { character: ICharacter }) => {
   return (
-    <div className="flex min-h-[20rem] w-52 grow cursor-pointer flex-col justify-between rounded-md bg-[#0d0d0d] p-3 text-white transition-colors hover:bg-[#292929] sm:w-60">
+    <div
+      className="flex h-full min-h-[20rem] w-52 cursor-pointer flex-col justify-between rounded-md bg-[#0d0d0d] p-3 text-white transition-colors hover:bg-[#292929] sm:w-60"
+      tabIndex={0}
+    >
       <img src={character.image} />
       <span>
         <h1 className="mt-2 text-2xl font-extrabold">

@@ -2,7 +2,7 @@ import Characters from './Characters';
 
 function App() {
   return (
-    <main className="bg-primary">
+    <main>
       <Characters />
     </main>
   );
