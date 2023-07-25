@@ -68,6 +68,13 @@
           "caseInsensitive": true
         }
       }
+    ],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto",
+        "semi": true
+      }
     ]
   }
 }
