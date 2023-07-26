@@ -25,26 +25,33 @@ pnpm install
 ```bash
 pnpm run dev
 ```
+### Скрипты
 
-### Lint
+Lint
 
 ```bash
 pnpm run lint
 ```
 
-### Typecheck
+Local network
+
+```bash
+pnpm run network
+```
+
+Typecheck
 
 ```bash
 pnpm run typecheck
 ```
 
-### Build
+Build
 
 ```bash
 pnpm run build
 ```
 
-### Test
+Test
 
 ```bash
 pnpm run test
