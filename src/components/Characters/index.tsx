@@ -45,35 +45,40 @@ const Characters = () => {
   const { ref, inView } = useInView();
   const { filter } = useFilter();
   const filterThrottled = useThrottle(filter, 200);
-  const { status, data, error, isFetching, fetchNextPage, refetch } =
-    useInfiniteQuery<{
-      info: Info;
-      results: ICharacter[];
-    }>(
-      ['characters'],
-      async ({ pageParam = 1 }) => {
-        const { data } = await axios.get(
-          `https://rickandmortyapi.com/api/character/?page=${pageParam}${
-            filterThrottled.name ? `&name=${filterThrottled.name}` : ''
-          }${
-            filterThrottled.status ? `&status=${filterThrottled.status}` : ''
-          }${
-            filterThrottled.species ? `&species=${filterThrottled.species}` : ''
-          }${filterThrottled.type ? `&type=${filterThrottled.type}` : ''}${
-            filterThrottled.gender ? `&gender=${filterThrottled.gender}` : ''
-          }`
-        );
-        return data;
-      },
-      {
-        getNextPageParam: (lastPage) =>
-          lastPage.info.next
-            ? lastPage.info.next.split('=')[1].split('&')[0]
-            : undefined,
-        refetchOnWindowFocus: false,
-        retry: false
-      }
-    );
+  const {
+    status,
+    data,
+    error,
+    isFetching,
+    fetchNextPage,
+    refetch,
+    isRefetching
+  } = useInfiniteQuery<{
+    info: Info;
+    results: ICharacter[];
+  }>(
+    ['characters'],
+    async ({ pageParam = 1 }) => {
+      const { data } = await axios.get(
+        `https://rickandmortyapi.com/api/character/?page=${pageParam}${
+          filterThrottled.name ? `&name=${filterThrottled.name}` : ''
+        }${filterThrottled.status ? `&status=${filterThrottled.status}` : ''}${
+          filterThrottled.species ? `&species=${filterThrottled.species}` : ''
+        }${filterThrottled.type ? `&type=${filterThrottled.type}` : ''}${
+          filterThrottled.gender ? `&gender=${filterThrottled.gender}` : ''
+        }`
+      );
+      return data;
+    },
+    {
+      getNextPageParam: (lastPage) =>
+        lastPage.info.next
+          ? lastPage.info.next.split('=')[1].split('&')[0]
+          : undefined,
+      refetchOnWindowFocus: false,
+      retry: false
+    }
+  );
 
   useEffect(() => {
     refetch();
@@ -85,7 +90,7 @@ const Characters = () => {
     }
   }, [fetchNextPage, inView]);
 
-  if (status === 'loading') {
+  if (status === 'loading' || isRefetching) {
     return (
       <div className="flex h-[100dvh] w-full flex-col items-center justify-center gap-6">
         <div className="h-16 w-16 animate-spin rounded-full border-8 border-t-red-600" />
