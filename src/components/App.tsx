@@ -17,7 +17,7 @@ export const FilterContext = createContext<{
   setFilter: () => {}
 });
 
-interface Filter {
+export interface Filter {
   name: string;
   status: string | null;
   species: string | null;
