@@ -13,6 +13,8 @@ const CharacterModal = ({ character }: { character: ICharacter }) => {
         return '♀';
       case 'Male':
         return '♂';
+      case 'Genderless':
+        return '❌';
       case 'Human':
       case 'Humanoid':
         return '🧑';

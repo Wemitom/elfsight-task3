@@ -19,6 +19,8 @@ const Character = ({ character }: { character: ICharacter }) => {
                 ? 'text-pink-600'
                 : character.gender === 'Male'
                 ? 'text-blue-600'
+                : character.gender === 'Genderless'
+                ? 'text-red-600'
                 : 'text-gray-600'
             )}
           >
@@ -26,6 +28,8 @@ const Character = ({ character }: { character: ICharacter }) => {
               ? '♀'
               : character.gender === 'Male'
               ? '♂'
+              : character.gender === 'Genderless'
+              ? '❌'
               : '?'}
           </span>
         </h1>
